@@ -29,7 +29,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import { ReceivingTableComponent } from './receiving/receiving-table/receiving-table.component';
 import { ReceivingDialogComponent } from './receiving/receiving-dialog/receiving-dialog.component';
 import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import { ReceivingService } from './receiving/receiving.service';
+import { ReceivingService } from './services/receiving.service';
+import { PageHeaderComponent } from './shared/page-header/page-header.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,8 @@ import { ReceivingService } from './receiving/receiving.service';
     DashboardComponent,
     ErrorPageComponent,
     ReceivingTableComponent,
-    ReceivingDialogComponent
+    ReceivingDialogComponent,
+    PageHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +67,10 @@ import { ReceivingService } from './receiving/receiving.service';
     MatFormFieldModule,
     MatInputModule,
     MatChipsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule
   ],
   providers: [ReceivingService,  { provide: MAT_DIALOG_DATA, useValue: {} },],
   bootstrap: [AppComponent]

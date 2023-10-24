@@ -1,6 +1,76 @@
-<h2 mat-dialog-title>Install Angular</h2>
+<h2 mat-dialog-title>Receive Letter</h2>
 <mat-dialog-content class="mat-typography">
-    <h3>{{data.fromSender}}</h3>
-    <p>Learn one way to build applications with Angular and reuse your code and abilities to build
-        apps for any deployment target. For web, mobile web, native mobile and native desktop.</p>
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Letter Type</mat-label>
+            <mat-select>
+              <mat-option>Select Letter Type</mat-option>
+              <mat-option *ngFor="let lt of letterTypes" value="lt.id">{{lt.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>From</mat-label>
+            <input matInput placeholder="From">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description">
+        </mat-form-field>
+    </div>
+    <div class="flex-container">
+        <mat-form-field appearance="outline" class="almost-full-width">
+            <mat-label>Date Start</mat-label>
+            <input matInput [matDatepicker]="pickerDateStart">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="pickerDateStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateStart></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="almost-full-width">
+            <mat-label>Date End</mat-label>
+            <input matInput [matDatepicker]="pickerDateEnd">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="pickerDateEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateEnd></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Note</mat-label>
+            <input matInput placeholder="Note">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Contact no.</mat-label>
+            <input matInput placeholder="Contact no.">
+        </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <br>
+    <!-- Receiving personnel info -->
+    <div>
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Remarks</mat-label>
+            <input matInput placeholder="Remarks">
+        </mat-form-field>
+    </div>
+    <div class="flex-container">
+        <mat-form-field appearance="outline" class="almost-full-width">
+            <mat-label>Received by</mat-label>
+            <input matInput placeholder="Received by">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="almost-full-width">
+            <mat-label>Date & Time Received</mat-label>
+            <input matInput [matDatepicker]="pickerDateReceived">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="pickerDateReceived"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDateReceived></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <!-- <h3>{{data.fromSender}}</h3> -->
 </mat-dialog-content>

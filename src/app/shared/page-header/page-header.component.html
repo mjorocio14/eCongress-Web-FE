@@ -1,0 +1,10 @@
+<div class="flex-container">
+    <h1>{{pageTitle}}</h1>
+    <span>
+        <button mat-mini-fab *ngFor="let item of pageActions" color="primary" aria-label="Add button"
+            class="float-right" (click)="item.action()">
+            <mat-icon>{{item.text}}</mat-icon>
+        </button>
+    </span>
+</div>
+<mat-divider></mat-divider>

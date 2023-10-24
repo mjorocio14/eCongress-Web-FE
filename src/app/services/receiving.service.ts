@@ -1,22 +1,22 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, retry } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
-import { Receiving } from '../models/receiving.model';
+import { IReceiving } from '../interface/receiving.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReceivingService {
-  selectedRow: EventEmitter<Receiving> = new EventEmitter<Receiving>();
+  selectedRow: EventEmitter<IReceiving> = new EventEmitter<IReceiving>();
 
   constructor(private http: HttpClient) { }
 
-  getReceivingList(): Observable<Receiving[]> {
+  getReceivingList(): Observable<IReceiving[]> {
     const options = { params: new HttpParams().set('dateReceived', moment().toISOString()) };
-    return this.http.get<Receiving[]>(environment.apiUrl + 'Receiving', options).pipe(map(response => response));
+    return this.http.get<IReceiving[]>(environment.apiUrl + 'Receiving', options).pipe(map(response => response));
   }
 
 }

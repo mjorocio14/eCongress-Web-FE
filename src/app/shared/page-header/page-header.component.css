@@ -1,14 +1,6 @@
-.full-width {
-    width: -webkit-fill-available;
-}
-
-.almost-full-width {
-    width: 48%;
-}
-
 .flex-container {
     display: flex;
     align-items: center;
+    margin-top: -30px;
     justify-content: space-between;
 }
-

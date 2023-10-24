@@ -1,13 +1,13 @@
-import { Receiving } from './../../models/receiving.model';
 import { Component, OnInit } from '@angular/core';
-import { AfterViewInit, ViewChild } from '@angular/core';
+import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
-import { ReceivingService } from '../receiving.service';
+import { ReceivingService } from '../../services/receiving.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReceivingDialogComponent } from '../receiving-dialog/receiving-dialog.component';
+import { IReceiving } from 'src/app/interface/receiving.interface';
 
 @Component({
   selector: 'app-receiving-table',
@@ -17,7 +17,7 @@ import { ReceivingDialogComponent } from '../receiving-dialog/receiving-dialog.c
 export class ReceivingTableComponent implements OnInit {
   displayedColumns: string[] = ['no', 'fromSender', 'description', 'letterType', 'eventDateStart', 'eventDateEnd', 'note', 'dateTimeReceived', 'action'];
   dataSource?: any;
-  receivingList?: Receiving[] = [];
+  receivingList?: IReceiving[] = [];
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -41,7 +41,7 @@ export class ReceivingTableComponent implements OnInit {
   getReceivingList = () => {
     this.receivingService.getReceivingList()
       .subscribe((data) => {
-        this.dataSource = new MatTableDataSource<Receiving>(data.map((d) => {
+        this.dataSource = new MatTableDataSource<IReceiving>(data.map((d) => {
           d.eventDateStart = moment(d.eventDateStart).format('ll');
           d.eventDateEnd = moment(d.eventDateEnd).format('ll');
           d.dateTimeReceived = moment(d.dateTimeReceived).format('lll');
@@ -58,12 +58,14 @@ export class ReceivingTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  clickedRows(tableData: Receiving) {
+  clickedRows(tableData: IReceiving) {
     this.receivingService.selectedRow.emit(tableData);
     this.dialog.open(ReceivingDialogComponent, {
-      data: tableData
+      data: tableData,
+      height: '700px',
+      width: '600px',
     });
   }
-  
+
 
 }
