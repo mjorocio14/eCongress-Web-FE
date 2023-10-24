@@ -1,0 +1,43 @@
+mat-sidenav {
+    width: 280px;
+    background-color: #B71C1C;
+    border-right: 1px #f2bdbd solid;
+    box-shadow: 3px 0px 5px rgba(0, 0, 0, 0.2)
+}
+
+.example-container {
+    /* display: flex; */
+    /* flex-direction: column; */
+    position: absolute;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+mat-grid-tile {
+    background-color: white;
+}
+
+.nav-menu-spacing {
+    height: 60%;
+    padding-top: 0px !important;
+}
+
+app-nav {
+    width: -webkit-fill-available;
+}
+
+.page-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

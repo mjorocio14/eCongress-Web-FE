@@ -1,0 +1,22 @@
+.bg-navbar-dark {
+  background-color: #202020;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.logo-placement {
+  margin-top: -50%;
+}
+
+.mg-company {
+  margin-left: 20px;
+}
+
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}

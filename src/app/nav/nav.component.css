@@ -1,0 +1,24 @@
+mat-list {
+    width: 100%;
+    background-color: #B71C1C;
+}
+
+.btn-expand {
+    width: 100%;
+    text-align: left;
+}
+
+.mr-icon {
+    margin-right: 20px;
+}
+
+.btn-menu-expand {
+    width: 247px;
+    height: 40px;
+    line-height: 36px;
+}
+
+.btn-menu-expand:hover {
+    background-color: #B71C1C;
+    color: white;
+}

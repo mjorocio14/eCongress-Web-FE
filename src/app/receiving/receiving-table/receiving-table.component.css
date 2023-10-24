@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.mat-standard-chip {
+    min-height: 20px;
+    font-size: smaller;
+}
+
+tr.row-data:hover {
+    background: whitesmoke;
+}
+
+.mat-raised-button {
+    line-height: 30px;
+    font-size: smaller;
+}
