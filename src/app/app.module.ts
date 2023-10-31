@@ -23,7 +23,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatChipsModule} from '@angular/material/chips';
 import { ReceivingTableComponent } from './receiving/receiving-table/receiving-table.component';
@@ -34,6 +34,10 @@ import { PageHeaderComponent } from './shared/page-header/page-header.component'
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { FilterDialogComponent } from './shared/filter-dialog/filter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,8 @@ import {MatSelectModule} from '@angular/material/select';
     ErrorPageComponent,
     ReceivingTableComponent,
     ReceivingDialogComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    FilterDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -70,9 +75,13 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule,
+    MatExpansionModule
   ],
-  providers: [ReceivingService,  { provide: MAT_DIALOG_DATA, useValue: {} },],
+  providers: [ReceivingService,  { provide: MAT_DIALOG_DATA, useValue: {} }, {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

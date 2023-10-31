@@ -1,0 +1,56 @@
+<h2 mat-dialog-title>Advanced Filter</h2>
+<form [formGroup]="filterForm" (ngSubmit)="filterForm.valid && onFilterSubmit()">
+    <div mat-dialog-content class="mat-typography">
+        <div>
+            <mat-form-field class="full-width" [style.width.%]="100">
+                <mat-label>Letter Type</mat-label>
+                <mat-select formControlName="letterTypesId" name="letterTypesId">
+                    <mat-option>Select Letter Type</mat-option>
+                    <mat-option *ngFor="let lt of letterTypes" value={{lt.id}}>{{lt.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="filterForm.get('letterTypesId')?.hasError('required')">Please choose a letter
+                    type</mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field class="full-width" [style.width.%]="100">
+                <mat-label>From</mat-label>
+                <input matInput placeholder="From" formControlName="fromSender" name="from">
+                <mat-error *ngIf="filterForm.get('fromSender')?.hasError('required')">Please enter
+                    sender/from</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="flex-container">
+            <mat-form-field class="almost-full-width">
+                <mat-label>Start of Event Date</mat-label>
+                <input matInput [matDatepicker]="pickerDateStart" formControlName="eventDateStart" name="eventDateStart">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="pickerDateStart"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDateStart></mat-datepicker>
+                <mat-error *ngIf="filterForm.get('eventDateStart')?.hasError('required')">Please enter date
+                    start</mat-error>
+            </mat-form-field>
+            <mat-form-field class="almost-full-width">
+                <mat-label>End of Event Date</mat-label>
+                <input matInput [matDatepicker]="pickerDateEnd" formControlName="eventDateEnd" name="dateEnd">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="pickerDateEnd"></mat-datepicker-toggle>
+                <mat-datepicker #pickerDateEnd></mat-datepicker>
+                <mat-error *ngIf="filterForm.get('eventDateEnd')?.hasError('required')">Please enter date
+                    end</mat-error>
+            </mat-form-field>
+        </div>
+
+        <!-- Receiving personnel info -->
+        <mat-form-field class="almost-full-width" [style.width.%]="100">
+            <mat-label>Received by</mat-label>
+            <input matInput placeholder="Received by" formControlName="receivedBy" name="receivedBy">
+            <mat-error *ngIf="filterForm.get('receivedBy')?.hasError('required')">Please enter received by</mat-error>
+        </mat-form-field>
+        <!-- <h3>{{data.fromSender}}</h3> -->
+    </div>
+    <div mat-dialog-actions align="end">
+        <button mat-flat-button class="color-primary" type="submit">Filter</button>
+        <button mat-button mat-dialog-close type="button">Cancel</button>
+    </div>
+</form>

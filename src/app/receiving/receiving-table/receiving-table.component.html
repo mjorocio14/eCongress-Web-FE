@@ -1,11 +1,25 @@
-<mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-</mat-form-field>
+<mat-grid-list cols="4" rowHeight="50px" style="margin-top: 5px;">
+    <mat-grid-tile class="flex-container">
+        <mat-form-field appearance="standard">
+            <mat-label>Date Received</mat-label>
+            <input matInput [matDatepicker]="dateReceivedPicker" [formControl]="dateReceivedFilter" (ngModelChange)="onChangeDate()">
+            <mat-datepicker-toggle matSuffix [for]="dateReceivedPicker"></mat-datepicker-toggle>
+            <mat-datepicker #dateReceivedPicker></mat-datepicker>
+        </mat-form-field>
+        <button mat-flat-button color="primary" class="btn-custom" (click)="openFilterDialog()"><mat-icon>filter_list</mat-icon></button>
+    </mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile>
+        <mat-form-field appearance="standard">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+    </mat-grid-tile>
+</mat-grid-list>
 
 <mat-card>
     <table mat-table [dataSource]="dataSource" matSort>
-
         <ng-container matColumnDef="no">
             <th mat-header-cell *matHeaderCellDef> No. </th>
             <td mat-cell *matCellDef="let element; let i=index"> {{i+1}} </td>
@@ -23,18 +37,19 @@
 
         <ng-container matColumnDef="letterType">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-            <td mat-cell *matCellDef="let element"><mat-chip-list><mat-chip color="primary"
-                        selected>{{element.letterType.name}}</mat-chip></mat-chip-list></td>
+            <td mat-cell *matCellDef="let element"><mat-chip-list><mat-chip
+                        [ngStyle]="{ background: setBgColor(element.letterType.name), color: 'white' }">{{element.letterType.name}}</mat-chip></mat-chip-list>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="eventDateStart" mat-sort-header>
             <th mat-header-cell *matHeaderCellDef> Date Start </th>
-            <td mat-cell *matCellDef="let element"> {{element.eventDateStart}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.eventDateStart_formatted}} </td>
         </ng-container>
 
         <ng-container matColumnDef="eventDateEnd" mat-sort-header>
             <th mat-header-cell *matHeaderCellDef> Date End </th>
-            <td mat-cell *matCellDef="let element"> {{element.eventDateEnd}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.eventDateEnd_formatted}} </td>
         </ng-container>
 
         <ng-container matColumnDef="note">
@@ -42,25 +57,30 @@
             <td mat-cell *matCellDef="let element"> {{element.note}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="dateTimeReceived">
-            <th mat-header-cell *matHeaderCellDef> Date/Time Received </th>
-            <td mat-cell *matCellDef="let element"> {{element.dateTimeReceived}} </td>
+        <ng-container matColumnDef="receivedBy">
+            <th mat-header-cell *matHeaderCellDef> Received by </th>
+            <td mat-cell *matCellDef="let element"> {{element.receivedBy}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateReceived">
+            <th mat-header-cell *matHeaderCellDef> Date Received </th>
+            <td mat-cell *matCellDef="let element"> {{element.dateReceived_formatted}} </td>
         </ng-container>
 
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
-            <td mat-cell (click)="clickedRows(row)" *matCellDef="let row"><button mat-raised-button color="primary">Show</button> </td>
+            <td mat-cell (click)="clickedRows(row)" *matCellDef="let row"><button mat-raised-button
+                    color="primary">Show</button> </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row class="row-data" *matRowDef="let row; columns: displayedColumns;"></tr>
-       
+
         <!-- Row shown when there is no matching data. -->
         <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            <td class="mat-cell" colspan="10">No data matching the filter "{{input.value}}"</td>
         </tr>
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </mat-card>
-

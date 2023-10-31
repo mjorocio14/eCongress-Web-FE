@@ -12,3 +12,29 @@
     justify-content: space-between;
 }
 
+.mat-dialog-content {
+    max-height: 80vh;
+}
+
+@keyframes spinner {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 3px solid #b71c1c;
+    border-top-color: #451313;
+    animation: spinner .7s linear infinite;
+}
+

@@ -20,3 +20,9 @@ tr.row-data:hover {
     line-height: 30px;
     font-size: smaller;
 }
+
+.btn-custom {
+    margin-left: 10px;
+    min-width: auto;
+}
+

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ReceivingDialogComponent } from './receiving-dialog/receiving-dialog.component';
 
 @Component({
   selector: 'app-receiving',
@@ -8,19 +10,21 @@ import { Component } from '@angular/core';
 export class ReceivingComponent {
   ButtonActions: any[] = [{
     'text': 'add',
-    'action': () => {
-      alert('add');
-    }
+    'action': () => this.openDialog()
   }];
-  
-  constructor() {
-   
+
+  constructor(public dialog: MatDialog) {
+
   }
-
  
-
-
-
+  openDialog() {
+    this.dialog.open(ReceivingDialogComponent, {
+      data: {},
+      height: 'auto',
+      width: '600px',
+      disableClose: true
+    });
+  }
   
 
 }

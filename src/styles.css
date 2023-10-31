@@ -3,7 +3,33 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.btn-color-primary {
+.color-primary {
     background: #690000;
     color: white;
+}
+
+.color-success {
+    background: #6495ED;
+    color: white;
+}
+
+.color-green {
+    background: #00AB66;
+    color: white;
+}
+
+.success-snackbar {
+    color: black;
+    background-color:#7bdfad;
+}
+
+.error-snackbar {
+    color: white;
+    background-color:#d74c4c;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

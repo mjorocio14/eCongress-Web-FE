@@ -8,6 +8,8 @@ import { ReceivingService } from '../../services/receiving.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ReceivingDialogComponent } from '../receiving-dialog/receiving-dialog.component';
 import { IReceiving } from 'src/app/interface/receiving.interface';
+import { FormControl } from '@angular/forms';
+import { FilterDialogComponent } from 'src/app/shared/filter-dialog/filter-dialog.component';
 
 @Component({
   selector: 'app-receiving-table',
@@ -15,18 +17,24 @@ import { IReceiving } from 'src/app/interface/receiving.interface';
   styleUrls: ['./receiving-table.component.css']
 })
 export class ReceivingTableComponent implements OnInit {
-  displayedColumns: string[] = ['no', 'fromSender', 'description', 'letterType', 'eventDateStart', 'eventDateEnd', 'note', 'dateTimeReceived', 'action'];
+  displayedColumns: string[] = ['no', 'fromSender', 'description', 'letterType', 'eventDateStart', 'eventDateEnd', 'note', 'receivedBy', 'dateReceived', 'action'];
   dataSource?: any;
   receivingList?: IReceiving[] = [];
+  panelOpenState: boolean = false;
+  dateReceivedFilter: FormControl = new FormControl(new Date);
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
 
   constructor(private receivingService: ReceivingService, public dialog: MatDialog) {
-    this.getReceivingList();
+    this.onGetReceivingList(this.dateReceivedFilter.value);
   }
 
   ngOnInit(): void {
+    this.receivingService.refreshTable.subscribe(response => {
+      if(response)
+        this.onGetReceivingList(this.dateReceivedFilter.value);
+    });
   }
 
   applyFilter(event: Event) {
@@ -38,15 +46,10 @@ export class ReceivingTableComponent implements OnInit {
     }
   }
 
-  getReceivingList = () => {
-    this.receivingService.getReceivingList()
+  onGetReceivingList = (date: string) => {
+    this.receivingService.getReceiving(date)
       .subscribe((data) => {
-        this.dataSource = new MatTableDataSource<IReceiving>(data.map((d) => {
-          d.eventDateStart = moment(d.eventDateStart).format('ll');
-          d.eventDateEnd = moment(d.eventDateEnd).format('ll');
-          d.dateTimeReceived = moment(d.dateTimeReceived).format('lll');
-          return d;
-        }));
+        this.dataSource = new MatTableDataSource<IReceiving>(data);
 
         // Assign the paginator *after* dataSource is set
         this.setPagination();
@@ -58,14 +61,41 @@ export class ReceivingTableComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  clickedRows(tableData: IReceiving) {
-    this.receivingService.selectedRow.emit(tableData);
+  clickedRows(tableData: IReceiving) { 
     this.dialog.open(ReceivingDialogComponent, {
       data: tableData,
-      height: '700px',
+      height: 'auto',
       width: '600px',
+      disableClose: true
     });
   }
 
+  setBgColor(letterTypeName: string) {
+    let color = null;
+
+    switch(letterTypeName)
+    {
+      case 'Solicitation':
+        color = '#690000';
+        break;
+      case 'Invitation':
+        color = '#6495ED';
+        break;
+      case 'Memorandum':
+        color = '#00AB66';
+        break;
+    }
+
+    return color;
+  }
+
+  onChangeDate() {
+    this.receivingList = [];
+    this.onGetReceivingList(this.dateReceivedFilter.value);
+  }
+
+  openFilterDialog() {
+    this.dialog.open(FilterDialogComponent);
+  }
 
 }

@@ -6,11 +6,14 @@ export interface IReceiving {
      fromSender: string;
      description: string;
      eventDateStart: string;
+     eventDateStart_formatted: string;
      eventDateEnd: string;
+     eventDateEnd_formatted: string;
      note: string;
      contact: string;
      letterType: ILetterType;
-     dateTimeReceived: string;
+     dateReceived: string;
+     dateReceived_formatted: string;
      receivedBy: IPersonnel;
      remarks: string;
 }
